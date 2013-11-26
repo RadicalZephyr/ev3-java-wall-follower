@@ -24,6 +24,7 @@ public class Main
     public static void main(String[] args) {
         Main current = new Main();
         Button.waitForAnyEvent();
+        LCD.clear();
         LCD.drawString("Hello, lein java world!", 1, 3);
     }
 
