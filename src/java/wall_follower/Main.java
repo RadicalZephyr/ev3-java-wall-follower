@@ -91,24 +91,25 @@ public class Main
     void mainLoop() {
         startMotors();
 
-        Side follow;
+        Side followSide;
         // Forward until wall contact with one sensor.  Prefer left
         // sensor, by checking it first.
         boolean done = false;
         while (!done) {
             if (touches.get(Side.LEFT).isPressed()) {
-                follow = Side.LEFT;
+                followSide = Side.LEFT;
                 done = true;
             }
             if (touches.get(Side.RIGHT).isPressed()) {
-                follow = Side.RIGHT;
+                followSide = Side.RIGHT;
                 done = true;
             }
         }
-
+        stopMotors();
+        followWall(followSide);
     }
 
-    void followWall() {
+    void followWall(Side followSide) {
 
     }
 }
