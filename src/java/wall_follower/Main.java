@@ -17,6 +17,7 @@ import lejos.hardware.motor.NXTRegulatedMotor;
 
 import lejos.hardware.Button;
 import lejos.hardware.LCD;
+import lejos.hardware.Sound;
 
 import lejos.utility.Delay;
 
@@ -68,6 +69,8 @@ public class Main
     }
 
     void promptForStartPush() {
+        Sound.twoBeeps();
+        Sound.beep();
         LCD.clear();
         LCD.drawString("Please push any", 1, 1);
         LCD.drawString("button to begin.", 1, 3);
