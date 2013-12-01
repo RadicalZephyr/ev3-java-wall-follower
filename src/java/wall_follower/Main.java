@@ -140,11 +140,11 @@ public class Main
             if (touching) {
                 stopMotors();
                 motor.get(offSide).backward();
-                Delay.msDelay(600);
+                Delay.msDelay(800);
                 motor.get(offSide).flt();
-            } else if (!touching && distance[0] < 0.06) {
+            } else if (!touching && distance[0] < 0.15) {
                 int speed = motor.get(followSide).getSpeed();
-                motor.get(offSide).setSpeed(speed + 10);
+                motor.get(offSide).setSpeed(speed + 20);
             } else {
                 int speed = motor.get(followSide).getSpeed();
                 motor.get(followSide).setSpeed(100);
