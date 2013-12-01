@@ -53,10 +53,10 @@ public class Main
         LCD.clear();
         LCD.drawString("Printing data:", 0, line++);
 
-        LCD.drawString(String.format("L='%b'",
+        LCD.drawString(String.format("L= %b ",
                                      leftTouch.isPressed()),
                        0, line++);
-        LCD.drawString(String.format("R='%b'",
+        LCD.drawString(String.format("R= %b ",
                                      rightTouch.isPressed()),
                        0, line++);
 
