@@ -62,6 +62,7 @@ public class Main
 
         color = new EV3ColorSensor(SensorPort.S2);
         distance = new EV3UltrasonicSensor(SensorPort.S3);
+        distance.enable();
     }
 
     void setupMotors() {
