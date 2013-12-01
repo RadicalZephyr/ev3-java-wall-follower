@@ -85,10 +85,16 @@ public class Main
 
     void mainMove() {
         if (leftTouch.isPressed()) {
-            leftMotor.rotate(180);
+            int speed = rightMotor.getSpeed();
+            leftMotor.setSpeed(speed*2);
+            Delay.msDelay(1000);
+            leftMotor.setSpeed(speed);
         }
         if (rightTouch.isPressed()) {
-            rightMotor.rotate(180);
+            int speed = rightMotor.getSpeed();
+            rightMotor.setSpeed(speed*2);
+            Delay.msDelay(1000);
+            rightMotor.setSpeed(speed);
         }
     }
 
