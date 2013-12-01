@@ -120,6 +120,16 @@ public class Main
 
         while (!done) {
             touching = touch.get(followSide).isPressed();
+
+            if (touch.get(offSide).isPressed()) {
+                stopMotors();
+                motor.get(offSide).backward();
+                motor.get(followSide).forward();
+                Delay.msDelay(800);
+                stopMotors();
+                continue;
+            }
+
             if (touching) {
                 stopMotors();
                 motor.get(offSide).backward();
