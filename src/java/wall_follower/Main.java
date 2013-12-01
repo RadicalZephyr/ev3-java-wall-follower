@@ -123,26 +123,27 @@ public class Main
         followWall(followSide, offSide);
     }
 
+    float checkDistance(SampleProvider distanceSampler) {
+        float[] distance = new float[1];
+        distanceSampler.fetchSample(distance, 0);
+        return distance[0];
+    }
+
     void followWall(Side followSide, Side offSide) {
 
         boolean done = false;
         SampleProvider distanceSampler = distance.getDistanceMode();
         boolean touching;
-        float[] distance = new float[1];
 
         while (!done) {
-            if (Button.readButtons() != 0) {
-                done = true;
-            }
-
             touching = touch.get(followSide).isPressed();
-            distanceSampler.fetchSample(distance, 0);
             if (touching) {
                 stopMotors();
                 motor.get(offSide).backward();
                 Delay.msDelay(800);
                 motor.get(offSide).flt();
-            } else if (!touching && distance[0] < 0.15) {
+            } else if (!touching &&
+                       checkDistance(distanceSampler) < 0.15) {
                 int speed = motor.get(followSide).getSpeed();
                 motor.get(offSide).setSpeed(speed + 20);
             } else {
@@ -150,6 +151,10 @@ public class Main
                 motor.get(followSide).setSpeed(100);
                 Delay.msDelay(1000);
                 motor.get(followSide).setSpeed(speed);
+            }
+
+            if (Button.readButtons() != 0) {
+                done = true;
             }
             startMotors();
         }
