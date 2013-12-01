@@ -21,30 +21,30 @@ import lejos.hardware.Sound;
 
 import lejos.utility.Delay;
 
+import java.util.Map;
+import java.util.EnumMap;
+
 public class Main
 {
 
-    private EV3TouchSensor leftTouch;
-    private EV3TouchSensor rightTouch;
+    public enum Side {
+        LEFT, RIGHT;
+    }
+
+
+    private Map<Side, EV3TouchSensor> touches;
+
+    private Map<Side, NXTRegulatedMotor> motors;
 
     private EV3ColorSensor color;
     private EV3UltrasonicSensor distance;
-
-    private NXTRegulatedMotor leftMotor;
-    private NXTRegulatedMotor rightMotor;
 
     public static void main(String[] args) {
         Main current = new Main();
         boolean done = false;
         LCD.clear();
         current.promptForStartPush();
-        current.startMotors();
-        while (!done) {
-            current.mainMove();
-            if (Button.waitForAnyPress(100) != 0) {
-                done = true;
-            }
-        }
+        current.mainLoop();
         LCD.clear();
         LCD.drawString("Done!", 1, 1);
         Delay.msDelay(100);
@@ -56,16 +56,18 @@ public class Main
     }
 
     void setupSensors() {
-        leftTouch = new EV3TouchSensor(SensorPort.S1);
-        rightTouch = new EV3TouchSensor(SensorPort.S4);
+        touches = new EnumMap<Side, EV3TouchSensor>(Side.class);
+        touches.put(Side.LEFT, new EV3TouchSensor(SensorPort.S1));
+        touches.put(Side.RIGHT, new EV3TouchSensor(SensorPort.S4));
 
         color = new EV3ColorSensor(SensorPort.S2);
         distance = new EV3UltrasonicSensor(SensorPort.S3);
     }
 
     void setupMotors() {
-        leftMotor = Motor.B;
-        rightMotor = Motor.C;
+        motors = new EnumMap<Side, NXTRegulatedMotor>(Side.class);
+        motors.put(Side.LEFT, Motor.B);
+        motors.put(Side.RIGHT, Motor.C);
     }
 
     void promptForStartPush() {
@@ -80,49 +82,33 @@ public class Main
     }
 
     void startMotors() {
-        leftMotor.setSpeed(200);
-        rightMotor.setSpeed(200);
-        leftMotor.forward();
-        rightMotor.forward();
+        motors.get(Side.LEFT).setSpeed(200);
+        motors.get(Side.RIGHT).setSpeed(200);
+        motors.get(Side.LEFT).forward();
+        motors.get(Side.RIGHT).forward();
     }
 
-    void turnRelative(NXTRegulatedMotor fwd, NXTRegulatedMotor back) {
-            int fwdSpeed = fwd.getSpeed();
-            int backSpeed = back.getSpeed();
+    void mainLoop() {
+        startMotors();
 
-            fwd.setSpeed(fwdSpeed*2);
-            back.setSpeed(backSpeed/2);
-
-            Delay.msDelay(10);
-
-            fwd.setSpeed(fwdSpeed);
-            back.setSpeed(backSpeed);
-    }
-
-    void mainMove() {
-        if (leftTouch.isPressed()) {
-            turnRelative(leftMotor, rightMotor);
-        } else {
-            turnRelative(rightMotor, leftMotor);
+        Side follow;
+        // Forward until wall contact with one sensor.  Prefer left
+        // sensor, by checking it first.
+        boolean done = false;
+        while (!done) {
+            if (touches.get(Side.LEFT).isPressed()) {
+                follow = Side.LEFT;
+                done = true;
+            }
+            if (touches.get(Side.RIGHT).isPressed()) {
+                follow = Side.RIGHT;
+                done = true;
+            }
         }
-        if (rightTouch.isPressed()) {
-            turnRelative(rightMotor, leftMotor);
-        }
+
     }
 
-    void printSensors() {
-        int maxLen = 18;
-        int line = 0;
-        LCD.clear();
-        LCD.drawString("Printing data:", 0, line++);
-
-        LCD.drawString(String.format("L= %b ",
-                                     leftTouch.isPressed()),
-                       0, line++);
-        LCD.drawString(String.format("R= %b ",
-                                     rightTouch.isPressed()),
-                       0, line++);
-
+    void followWall() {
 
     }
 }
