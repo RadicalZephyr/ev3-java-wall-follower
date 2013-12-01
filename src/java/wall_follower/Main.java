@@ -19,6 +19,8 @@ import lejos.hardware.Button;
 import lejos.hardware.LCD;
 import lejos.hardware.Sound;
 
+import lejos.robotics.SampleProvider;
+
 import lejos.utility.Delay;
 
 import java.util.Map;
@@ -136,10 +138,18 @@ public class Main
             }
 
             touching = touch.get(followSide).isPressed();
-            fetchSample(distance, 0);
+            distanceSampler.fetchSample(distance, 0);
 
-            if () {
-
+            if (touching) {
+                stopMotors();
+                motor.get(offSide).backward();
+                Delay.msDelay(100);
+                motor.get(offSide).flt();
+            } else if (!touching && distance[0] < 25) {
+                int speed = motor.get(followSide).getSpeed();
+                motor.get(offSide).setSpeed(speed + 10);
+            } else {
+                // Execute a 90 left turn here
             }
         }
     }
