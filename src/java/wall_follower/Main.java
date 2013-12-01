@@ -48,7 +48,18 @@ public class Main
     }
 
     void printSensors() {
+        int maxLen = 18;
+        int line = 0;
         LCD.clear();
-        LCD.drawString("Printing sensor data:", 0, 0);
+        LCD.drawString("Printing data:", 0, line++);
+
+        LCD.drawString(String.format("L='%b'",
+                                     leftTouch.isPressed()),
+                       0, line++);
+        LCD.drawString(String.format("R='%b'",
+                                     rightTouch.isPressed()),
+                       0, line++);
+
+
     }
 }
