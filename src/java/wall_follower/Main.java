@@ -82,17 +82,21 @@ public class Main
     }
 
     void startMotors() {
-        motors.get(Side.LEFT).setSpeed(200);
-        motors.get(Side.RIGHT).setSpeed(200);
-        motors.get(Side.LEFT).forward();
-        motors.get(Side.RIGHT).forward();
+        NXTRegulatedMotor left = motors.get(Side.LEFT);
+        NXTRegulatedMotor right = motors.get(Side.RIGHT);
+        left.setSpeed(200);
+        right.setSpeed(200);
+        left.forward();
+        right.forward();
     }
 
     void stopMotors() {
-        for (NXTRegulatedMotor motor : motors.values()) {
-            motor.stop();
-            motor.flt();
-        }
+        NXTRegulatedMotor left = motors.get(Side.LEFT);
+        NXTRegulatedMotor right = motors.get(Side.RIGHT);
+        left.stop();
+        right.stop();
+        left.flt();
+        right.flt();
     }
 
     void mainLoop() {
