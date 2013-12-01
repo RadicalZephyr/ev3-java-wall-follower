@@ -102,7 +102,7 @@ public class Main
     void mainLoop() {
         startMotors();
 
-        Side followSide;
+        Side followSide = Side.LEFT;
         // Forward until wall contact with one sensor.  Prefer left
         // sensor, by checking it first.
         boolean done = false;
