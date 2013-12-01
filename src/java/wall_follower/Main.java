@@ -33,9 +33,9 @@ public class Main
     public static void main(String[] args) {
         Main current = new Main();
         boolean done = false;
-
+        LCD.clear();
         while (!done) {
-            current.printSensors();
+            current.mainMove();
             if (Button.waitForAnyPress(100) != 0) {
                 done = true;
             }
@@ -58,6 +58,15 @@ public class Main
     void setupMotors() {
         leftMotor = Motor.B;
         rightMotor = Motor.C;
+    }
+
+    void mainMove() {
+        if (leftTouch.isPressed()) {
+            leftMotor.rotate(180);
+        }
+        if (rightTouch.isPressed()) {
+            rightMotor.rotate(180);
+        }
     }
 
     void printSensors() {
