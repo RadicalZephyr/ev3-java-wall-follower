@@ -86,18 +86,27 @@ public class Main
         rightMotor.forward();
     }
 
+    void turnRelative(NXTRegulatedMotor fwd, NXTRegulatedMotor back) {
+            int fwdSpeed = fwd.getSpeed();
+            int backSpeed = back.getSpeed();
+
+            fwd.setSpeed(fwdSpeed*2);
+            back.setSpeed(backSpeed/2);
+
+            Delay.msDelay(1000);
+
+            fwd.setSpeed(fwdSpeed);
+            back.setSpeed(backSpeed);
+    }
+
     void mainMove() {
         if (leftTouch.isPressed()) {
-            int speed = rightMotor.getSpeed();
-            leftMotor.setSpeed(speed*2);
-            Delay.msDelay(1000);
-            leftMotor.setSpeed(speed);
+            turnRelative(leftMotor, rightMotor);
+        } else {
+            turnRelative(rightMotor, leftMotor);
         }
         if (rightTouch.isPressed()) {
-            int speed = rightMotor.getSpeed();
-            rightMotor.setSpeed(speed*2);
-            Delay.msDelay(1000);
-            rightMotor.setSpeed(speed);
+            turnRelative(rightMotor, leftMotor);
         }
     }
 
