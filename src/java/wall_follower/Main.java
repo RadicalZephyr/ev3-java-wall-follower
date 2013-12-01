@@ -147,7 +147,7 @@ public class Main
                 motor.get(offSide).setSpeed(speed + 10);
             } else {
                 int speed = motor.get(followSide).getSpeed();
-                motor.get(followSide).setSpeed(50);
+                motor.get(followSide).setSpeed(100);
                 Delay.msDelay(1000);
                 motor.get(followSide).setSpeed(speed);
             }
