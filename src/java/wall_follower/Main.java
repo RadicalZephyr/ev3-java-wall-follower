@@ -131,7 +131,7 @@ public class Main
         float[] distance = new float[1];
 
         while (!done) {
-            if (Button.waitForAnyPress(10) != 0) {
+            if (Button.readButtons() != 0) {
                 done = true;
             }
 
