@@ -18,6 +18,8 @@ import lejos.hardware.motor.NXTRegulatedMotor;
 import lejos.hardware.Button;
 import lejos.hardware.LCD;
 
+import lejos.utility.Delay;
+
 public class Main
 {
 
@@ -42,6 +44,9 @@ public class Main
                 done = true;
             }
         }
+        LCD.clear();
+        LCD.drawString("Done!", 1, 1);
+        Delay.msDelay(100);
     }
 
     public Main() {
