@@ -93,7 +93,7 @@ public class Main
             fwd.setSpeed(fwdSpeed*2);
             back.setSpeed(backSpeed/2);
 
-            Delay.msDelay(1000);
+            Delay.msDelay(10);
 
             fwd.setSpeed(fwdSpeed);
             back.setSpeed(backSpeed);
