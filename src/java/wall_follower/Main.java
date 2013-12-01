@@ -34,6 +34,7 @@ public class Main
         Main current = new Main();
         boolean done = false;
         LCD.clear();
+        current.promptForStartPush();
         current.startMotors();
         while (!done) {
             current.mainMove();
@@ -59,6 +60,15 @@ public class Main
     void setupMotors() {
         leftMotor = Motor.B;
         rightMotor = Motor.C;
+    }
+
+    void promptForStartPush() {
+        LCD.clear();
+        LCD.drawString("Please push any", 1, 1);
+        LCD.drawString("button to begin.", 1, 3);
+        Button.waitForAnyPress();
+        LCD.clear();
+        LCD.drawString("Running...", 1, 1);
     }
 
     void startMotors() {
