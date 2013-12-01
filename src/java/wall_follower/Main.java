@@ -11,6 +11,10 @@ import lejos.hardware.port.SensorPort;
 import lejos.hardware.sensor.EV3ColorSensor;
 import lejos.hardware.sensor.EV3TouchSensor;
 import lejos.hardware.sensor.EV3UltrasonicSensor;
+
+import lejos.hardware.motor.Motor;
+import lejos.hardware.motor.NXTRegulatedMotor;
+
 import lejos.hardware.Button;
 import lejos.hardware.LCD;
 
@@ -22,6 +26,9 @@ public class Main
 
     private EV3ColorSensor color;
     private EV3UltrasonicSensor distance;
+
+    private NXTRegulatedMotor leftMotor;
+    private NXTRegulatedMotor rightMotor;
 
     public static void main(String[] args) {
         Main current = new Main();
@@ -37,6 +44,7 @@ public class Main
 
     public Main() {
         setupSensors();
+        setupMotors();
     }
 
     void setupSensors() {
@@ -45,6 +53,11 @@ public class Main
 
         color = new EV3ColorSensor(SensorPort.S2);
         distance = new EV3UltrasonicSensor(SensorPort.S3);
+    }
+
+    void setupMotors() {
+        leftMotor = Motor.B;
+        rightMotor = Motor.C;
     }
 
     void printSensors() {
