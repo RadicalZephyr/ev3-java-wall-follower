@@ -29,14 +29,11 @@ import java.util.EnumMap;
 public class Main
 {
 
-    public enum Side {
-        LEFT, RIGHT;
-    }
+    private EV3TouchSensor leftTouch;
+    private EV3TouchSensor rightTouch;
 
-
-    private Map<Side, EV3TouchSensor> touch;
-
-    private Map<Side, NXTRegulatedMotor> motor;
+    private NXTRegulatedMotor leftMotor;
+    private NXTRegulatedMotor rightMotor;
 
     private EV3ColorSensor color;
     private EV3UltrasonicSensor distance;
@@ -58,9 +55,8 @@ public class Main
     }
 
     void setupSensors() {
-        touch = new EnumMap<Side, EV3TouchSensor>(Side.class);
-        touch.put(Side.LEFT, new EV3TouchSensor(SensorPort.S1));
-        touch.put(Side.RIGHT, new EV3TouchSensor(SensorPort.S4));
+        leftTouch = new EV3TouchSensor(SensorPort.S1);
+        rightTouch = new EV3TouchSensor(SensorPort.S4);
 
         color = new EV3ColorSensor(SensorPort.S3);
         distance = new EV3UltrasonicSensor(SensorPort.S2);
@@ -68,11 +64,10 @@ public class Main
     }
 
     void setupMotors() {
-        motor = new EnumMap<Side, NXTRegulatedMotor>(Side.class);
-        motor.put(Side.LEFT, Motor.B);
-        motor.put(Side.RIGHT, Motor.C);
-        motor.get(Side.LEFT).setSpeed(200);
-        motor.get(Side.RIGHT).setSpeed(200);
+        leftMotor = Motor.B;
+        rightMotor = Motor.C;
+        leftMotor.setSpeed(200);
+        rightMotor.setSpeed(200);
     }
 
     void promptForStartPush() {
@@ -87,22 +82,20 @@ public class Main
     }
 
     void startMotors() {
-        motor.get(Side.LEFT).forward();
-        motor.get(Side.RIGHT).forward();
+        leftMotor.forward();
+        rightMotor.forward();
     }
 
     void stopMotors() {
-        NXTRegulatedMotor left = motor.get(Side.LEFT);
-        NXTRegulatedMotor right = motor.get(Side.RIGHT);
-        left.stop();
-        right.stop();
-        left.flt();
-        right.flt();
+        leftMotor.stop();
+        rightMotor.stop();
+        leftMotor.flt();
+        rightMotor.flt();
     }
 
     void mainLoop() {
         startMotors();
-        followWall(Side.LEFT, Side.RIGHT);
+        followWall();
     }
 
     float checkDistance(SampleProvider distanceSampler) {
@@ -111,7 +104,7 @@ public class Main
         return distance[0];
     }
 
-    void followWall(Side followSide, Side offSide) {
+    void followWall() {
 
         boolean done = false;
         SampleProvider distanceSampler = distance.getDistanceMode();
@@ -119,12 +112,12 @@ public class Main
         int speed;
 
         while (!done) {
-            touching = touch.get(followSide).isPressed();
+            touching = leftTouch.isPressed();
 
-            if (touch.get(offSide).isPressed()) {
+            if (rightTouch.isPressed()) {
                 stopMotors();
-                motor.get(offSide).backward();
-                motor.get(followSide).forward();
+                rightMotor.backward();
+                leftMotor.forward();
                 Delay.msDelay(800);
                 stopMotors();
                 continue;
@@ -132,18 +125,18 @@ public class Main
 
             if (touching) {
                 stopMotors();
-                motor.get(offSide).backward();
+                rightMotor.backward();
                 Delay.msDelay(800);
-                motor.get(offSide).flt();
+                rightMotor.flt();
             } else if (!touching &&
                        checkDistance(distanceSampler) < 0.11) {
-                speed = motor.get(followSide).getSpeed();
-                motor.get(offSide).setSpeed(speed + 20);
+                speed = leftMotor.getSpeed();
+                rightMotor.setSpeed(speed + 20);
             } else {
-                speed = motor.get(followSide).getSpeed();
-                motor.get(followSide).setSpeed(80);
+                speed = leftMotor.getSpeed();
+                leftMotor.setSpeed(80);
                 Delay.msDelay(1000);
-                motor.get(followSide).setSpeed(speed);
+                leftMotor.setSpeed(speed);
             }
 
             if (Button.readButtons() != 0) {
