@@ -34,6 +34,7 @@ public class Main
         Main current = new Main();
         boolean done = false;
         LCD.clear();
+        current.startMotors();
         while (!done) {
             current.mainMove();
             if (Button.waitForAnyPress(100) != 0) {
@@ -58,6 +59,13 @@ public class Main
     void setupMotors() {
         leftMotor = Motor.B;
         rightMotor = Motor.C;
+    }
+
+    void startMotors() {
+        leftMotor.setSpeed(100);
+        rightMotor.setSpeed(100);
+        leftMotor.forward();
+        rightMotor.forward();
     }
 
     void mainMove() {
