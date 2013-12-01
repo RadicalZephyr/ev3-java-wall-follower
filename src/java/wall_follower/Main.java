@@ -62,8 +62,8 @@ public class Main
         touch.put(Side.LEFT, new EV3TouchSensor(SensorPort.S1));
         touch.put(Side.RIGHT, new EV3TouchSensor(SensorPort.S4));
 
-        color = new EV3ColorSensor(SensorPort.S2);
-        distance = new EV3UltrasonicSensor(SensorPort.S3);
+        color = new EV3ColorSensor(SensorPort.S3);
+        distance = new EV3UltrasonicSensor(SensorPort.S2);
         distance.enable();
     }
 
