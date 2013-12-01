@@ -133,7 +133,7 @@ public class Main
         float[] distance = new float[1];
 
         while (!done) {
-            if (Button.waitForAnyPress(10) == 0) {
+            if (Button.waitForAnyPress(10) != 0) {
                 done = true;
             }
 
@@ -143,7 +143,7 @@ public class Main
             if (touching) {
                 stopMotors();
                 motor.get(offSide).backward();
-                Delay.msDelay(100);
+                Delay.msDelay(600);
                 motor.get(offSide).flt();
             } else if (!touching && distance[0] < 25) {
                 int speed = motor.get(followSide).getSpeed();
@@ -151,6 +151,7 @@ public class Main
             } else {
                 // Execute a 90 left turn here
             }
+            startMotors();
         }
     }
 }
