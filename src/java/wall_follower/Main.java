@@ -47,7 +47,7 @@ public class Main
         current.mainLoop();
         LCD.clear();
         LCD.drawString("Done!", 1, 1);
-        Delay.msDelay(100);
+        Delay.msDelay(1000);
     }
 
     public Main() {
@@ -116,7 +116,6 @@ public class Main
                 done = true;
             }
         }
-        stopMotors();
         followWall(followSide);
     }
 
