@@ -102,25 +102,7 @@ public class Main
 
     void mainLoop() {
         startMotors();
-
-        Side followSide = Side.LEFT;
-        Side offSide = Side.RIGHT;
-        // Forward until wall contact with one sensor.  Prefer left
-        // sensor, by checking it first.
-        boolean done = false;
-        while (!done) {
-            if (touch.get(Side.LEFT).isPressed()) {
-                followSide = Side.LEFT;
-                offSide = Side.RIGHT;
-                done = true;
-            }
-            if (touch.get(Side.RIGHT).isPressed()) {
-                followSide = Side.RIGHT;
-                offSide = Side.LEFT;
-                done = true;
-            }
-        }
-        followWall(followSide, offSide);
+        followWall(Side.LEFT, Side.RIGHT);
     }
 
     float checkDistance(SampleProvider distanceSampler) {
