@@ -143,12 +143,12 @@ public class Main
                 Delay.msDelay(800);
                 motor.get(offSide).flt();
             } else if (!touching &&
-                       checkDistance(distanceSampler) < 0.09) {
+                       checkDistance(distanceSampler) < 0.11) {
                 int speed = motor.get(followSide).getSpeed();
                 motor.get(offSide).setSpeed(speed + 20);
             } else {
                 int speed = motor.get(followSide).getSpeed();
-                motor.get(followSide).setSpeed(75);
+                motor.get(followSide).setSpeed(80);
                 Delay.msDelay(1000);
                 motor.get(followSide).setSpeed(speed);
             }
