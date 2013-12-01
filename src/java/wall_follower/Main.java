@@ -8,6 +8,7 @@
 package wall_follower;
 
 import lejos.hardware.port.SensorPort;
+import lejos.hardware.sensor.EV3ColorSensor;
 import lejos.hardware.sensor.EV3TouchSensor;
 import lejos.hardware.sensor.EV3UltrasonicSensor;
 import lejos.hardware.Button;
@@ -19,13 +20,19 @@ public class Main
     private EV3TouchSensor leftTouch;
     private EV3TouchSensor rightTouch;
 
+    private EV3ColorSensor color;
     private EV3UltrasonicSensor distance;
 
     public static void main(String[] args) {
         Main current = new Main();
-        Button.waitForAnyEvent();
-        LCD.clear();
-        LCD.drawString("Hello, lein java world!", 1, 3);
+        boolean done = false;
+
+        while (!done) {
+            current.printSensors();
+            if (Button.waitForAnyPress(100) != 0) {
+                done = true;
+            }
+        }
     }
 
     public Main() {
@@ -36,8 +43,12 @@ public class Main
         leftTouch = new EV3TouchSensor(SensorPort.S1);
         rightTouch = new EV3TouchSensor(SensorPort.S4);
 
+        color = new EV3ColorSensor(SensorPort.S2);
         distance = new EV3UltrasonicSensor(SensorPort.S3);
     }
 
-
+    void printSensors() {
+        LCD.clear();
+        LCD.drawString("Printing sensor data:", 0, 0);
+    }
 }
