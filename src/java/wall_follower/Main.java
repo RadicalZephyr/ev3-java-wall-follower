@@ -32,9 +32,9 @@ public class Main
     }
 
 
-    private Map<Side, EV3TouchSensor> touches;
+    private Map<Side, EV3TouchSensor> touch;
 
-    private Map<Side, NXTRegulatedMotor> motors;
+    private Map<Side, NXTRegulatedMotor> motor;
 
     private EV3ColorSensor color;
     private EV3UltrasonicSensor distance;
@@ -56,18 +56,18 @@ public class Main
     }
 
     void setupSensors() {
-        touches = new EnumMap<Side, EV3TouchSensor>(Side.class);
-        touches.put(Side.LEFT, new EV3TouchSensor(SensorPort.S1));
-        touches.put(Side.RIGHT, new EV3TouchSensor(SensorPort.S4));
+        touch = new EnumMap<Side, EV3TouchSensor>(Side.class);
+        touch.put(Side.LEFT, new EV3TouchSensor(SensorPort.S1));
+        touch.put(Side.RIGHT, new EV3TouchSensor(SensorPort.S4));
 
         color = new EV3ColorSensor(SensorPort.S2);
         distance = new EV3UltrasonicSensor(SensorPort.S3);
     }
 
     void setupMotors() {
-        motors = new EnumMap<Side, NXTRegulatedMotor>(Side.class);
-        motors.put(Side.LEFT, Motor.B);
-        motors.put(Side.RIGHT, Motor.C);
+        motor = new EnumMap<Side, NXTRegulatedMotor>(Side.class);
+        motor.put(Side.LEFT, Motor.B);
+        motor.put(Side.RIGHT, Motor.C);
     }
 
     void promptForStartPush() {
@@ -82,8 +82,8 @@ public class Main
     }
 
     void startMotors() {
-        NXTRegulatedMotor left = motors.get(Side.LEFT);
-        NXTRegulatedMotor right = motors.get(Side.RIGHT);
+        NXTRegulatedMotor left = motor.get(Side.LEFT);
+        NXTRegulatedMotor right = motor.get(Side.RIGHT);
         left.setSpeed(200);
         right.setSpeed(200);
         left.forward();
@@ -91,8 +91,8 @@ public class Main
     }
 
     void stopMotors() {
-        NXTRegulatedMotor left = motors.get(Side.LEFT);
-        NXTRegulatedMotor right = motors.get(Side.RIGHT);
+        NXTRegulatedMotor left = motor.get(Side.LEFT);
+        NXTRegulatedMotor right = motor.get(Side.RIGHT);
         left.stop();
         right.stop();
         left.flt();
@@ -107,11 +107,11 @@ public class Main
         // sensor, by checking it first.
         boolean done = false;
         while (!done) {
-            if (touches.get(Side.LEFT).isPressed()) {
+            if (touch.get(Side.LEFT).isPressed()) {
                 followSide = Side.LEFT;
                 done = true;
             }
-            if (touches.get(Side.RIGHT).isPressed()) {
+            if (touch.get(Side.RIGHT).isPressed()) {
                 followSide = Side.RIGHT;
                 done = true;
             }
