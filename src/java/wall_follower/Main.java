@@ -71,6 +71,8 @@ public class Main
         motor = new EnumMap<Side, NXTRegulatedMotor>(Side.class);
         motor.put(Side.LEFT, Motor.B);
         motor.put(Side.RIGHT, Motor.C);
+        motor.get(Side.LEFT).setSpeed(200);
+        motor.get(Side.RIGHT).setSpeed(200);
     }
 
     void promptForStartPush() {
@@ -85,12 +87,8 @@ public class Main
     }
 
     void startMotors() {
-        NXTRegulatedMotor left = motor.get(Side.LEFT);
-        NXTRegulatedMotor right = motor.get(Side.RIGHT);
-        left.setSpeed(200);
-        right.setSpeed(200);
-        left.forward();
-        right.forward();
+        motor.get(Side.LEFT).forward();
+        motor.get(Side.RIGHT).forward();
     }
 
     void stopMotors() {
@@ -139,17 +137,19 @@ public class Main
 
             touching = touch.get(followSide).isPressed();
             distanceSampler.fetchSample(distance, 0);
-
             if (touching) {
                 stopMotors();
                 motor.get(offSide).backward();
                 Delay.msDelay(600);
                 motor.get(offSide).flt();
-            } else if (!touching && distance[0] < 25) {
+            } else if (!touching && distance[0] < 0.06) {
                 int speed = motor.get(followSide).getSpeed();
                 motor.get(offSide).setSpeed(speed + 10);
             } else {
-                // Execute a 90 left turn here
+                int speed = motor.get(followSide).getSpeed();
+                motor.get(followSide).setSpeed(50);
+                Delay.msDelay(1000);
+                motor.get(followSide).setSpeed(speed);
             }
             startMotors();
         }
