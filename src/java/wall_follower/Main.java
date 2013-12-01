@@ -88,6 +88,13 @@ public class Main
         motors.get(Side.RIGHT).forward();
     }
 
+    void stopMotors() {
+        for (NXTRegulatedMotor motor : motors.values()) {
+            motor.stop();
+            motor.flt();
+        }
+    }
+
     void mainLoop() {
         startMotors();
 
