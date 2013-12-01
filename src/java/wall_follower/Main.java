@@ -134,6 +134,7 @@ public class Main
         boolean done = false;
         SampleProvider distanceSampler = distance.getDistanceMode();
         boolean touching;
+        int speed;
 
         while (!done) {
             touching = touch.get(followSide).isPressed();
@@ -144,10 +145,10 @@ public class Main
                 motor.get(offSide).flt();
             } else if (!touching &&
                        checkDistance(distanceSampler) < 0.11) {
-                int speed = motor.get(followSide).getSpeed();
+                speed = motor.get(followSide).getSpeed();
                 motor.get(offSide).setSpeed(speed + 20);
             } else {
-                int speed = motor.get(followSide).getSpeed();
+                speed = motor.get(followSide).getSpeed();
                 motor.get(followSide).setSpeed(80);
                 Delay.msDelay(1000);
                 motor.get(followSide).setSpeed(speed);
