@@ -80,8 +80,8 @@ public class Main
     }
 
     void startMotors() {
-        leftMotor.setSpeed(100);
-        rightMotor.setSpeed(100);
+        leftMotor.setSpeed(200);
+        rightMotor.setSpeed(200);
         leftMotor.forward();
         rightMotor.forward();
     }
