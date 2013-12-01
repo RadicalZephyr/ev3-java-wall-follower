@@ -124,5 +124,22 @@ public class Main
 
     void followWall(Side followSide, Side offSide) {
 
+        boolean done = false;
+        SampleProvider distanceSampler = distance.getDistanceMode();
+        boolean touching;
+        float[] distance = new float[1];
+
+        while (!done) {
+            if (Button.waitForAnyPress(10) == 0) {
+                done = true;
+            }
+
+            touching = touch.get(followSide).isPressed();
+            fetchSample(distance, 0);
+
+            if () {
+
+            }
+        }
     }
 }
