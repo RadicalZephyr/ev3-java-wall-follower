@@ -23,9 +23,6 @@ import lejos.robotics.SampleProvider;
 
 import lejos.utility.Delay;
 
-import java.util.Map;
-import java.util.EnumMap;
-
 public class Main
 {
 
