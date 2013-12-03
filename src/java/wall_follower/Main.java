@@ -1,10 +1,22 @@
-/* @(#)Main.java
- */
-/**
- *
- *
- * @author <a href="mailto:shannog@CF405-17.cs.wwu.edu">Geoff Peter Shannon</a>
- */
+/* Program name: Main
+     Description: A wall-following robot
+     Interesting Features:
+
+Hardware:
+Port                  Sensor
+1                      Touch
+2                      Ultrasonic
+4                      Touch
+
+Port                Motor
+B                    Left
+C                    Right
+
+Course Number: CSCI 372, Fall 2013
+Student Name: Geoff Shannon
+References: lejos
+*/
+
 package wall_follower;
 
 import lejos.hardware.port.SensorPort;
