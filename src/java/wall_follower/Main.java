@@ -109,7 +109,6 @@ public class Main
         int speed;
 
         while (!done) {
-            touching = leftTouch.isPressed();
 
             if (rightTouch.isPressed()) {
                 stopMotors();
@@ -120,6 +119,7 @@ public class Main
                 continue;
             }
 
+            touching = leftTouch.isPressed();
             if (touching) {
                 stopMotors();
                 rightMotor.backward();
@@ -131,7 +131,7 @@ public class Main
                 rightMotor.setSpeed(speed + 20);
             } else {
                 speed = leftMotor.getSpeed();
-                leftMotor.setSpeed(80);
+                leftMotor.setSpeed(90);
                 Delay.msDelay(1000);
                 leftMotor.setSpeed(speed);
             }
