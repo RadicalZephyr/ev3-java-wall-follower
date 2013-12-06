@@ -1,14 +1,8 @@
-# wall-follower
+To compile this, go to a command prompt in this directory, and run:
 
-A Clojure library designed to ... well, that part is up to you.
+    compile.bat
 
-## Usage
+Then the jar file will be in the target directory, and called
+ev3main.jar.
 
-FIXME
-
-## License
-
-Copyright © 2013 FIXME
-
-Distributed under the Eclipse Public License either version 1.0 or (at
-your option) any later version.
+The one and only source file is "src/java/wall_follower/Main.java"
