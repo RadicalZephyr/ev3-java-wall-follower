@@ -114,43 +114,5 @@ public class Main
 
     void followWall() {
 
-        boolean done = false;
-        SampleProvider distanceSampler = distance.getDistanceMode();
-        boolean touching;
-        int speed;
-
-        while (!done) {
-
-            if (rightTouch.isPressed()) {
-                stopMotors();
-                rightMotor.backward();
-                leftMotor.forward();
-                Delay.msDelay(800);
-                stopMotors();
-                continue;
-            }
-
-            touching = leftTouch.isPressed();
-            if (touching) {
-                stopMotors();
-                rightMotor.backward();
-                Delay.msDelay(800);
-                rightMotor.flt();
-            } else if (!touching &&
-                       checkDistance(distanceSampler) < 0.11) {
-                speed = leftMotor.getSpeed();
-                rightMotor.setSpeed(speed + 20);
-            } else {
-                speed = leftMotor.getSpeed();
-                leftMotor.setSpeed(90);
-                Delay.msDelay(1000);
-                leftMotor.setSpeed(speed);
-            }
-
-            if (Button.readButtons() != 0) {
-                done = true;
-            }
-            startMotors();
-        }
     }
 }
