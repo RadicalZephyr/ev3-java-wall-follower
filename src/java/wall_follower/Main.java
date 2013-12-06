@@ -20,7 +20,6 @@ References: lejos
 package wall_follower;
 
 import lejos.hardware.port.SensorPort;
-import lejos.hardware.sensor.EV3ColorSensor;
 import lejos.hardware.sensor.EV3TouchSensor;
 import lejos.hardware.sensor.EV3UltrasonicSensor;
 
@@ -44,7 +43,6 @@ public class Main
     private NXTRegulatedMotor leftMotor;
     private NXTRegulatedMotor rightMotor;
 
-    private EV3ColorSensor color;
     private EV3UltrasonicSensor distance;
 
     public static void main(String[] args) {
@@ -64,17 +62,18 @@ public class Main
     }
 
     void setupSensors() {
-        leftTouch = new EV3TouchSensor(SensorPort.S1);
-        rightTouch = new EV3TouchSensor(SensorPort.S4);
+        leftTouch = new EV3TouchSensor(SensorPort.S4);
+        rightTouch = new EV3TouchSensor(SensorPort.S3);
 
-        color = new EV3ColorSensor(SensorPort.S3);
-        distance = new EV3UltrasonicSensor(SensorPort.S2);
+        distance = new EV3UltrasonicSensor(SensorPort.S1);
         distance.enable();
     }
 
     void setupMotors() {
-        leftMotor = Motor.B;
-        rightMotor = Motor.C;
+        leftMotor = Motor.C;
+        rightMotor = Motor.B;
+        leftMotor.setAcceleration(3000);
+        rightMotor.setAcceleration(3000);
         leftMotor.setSpeed(200);
         rightMotor.setSpeed(200);
     }
@@ -91,8 +90,8 @@ public class Main
     }
 
     void startMotors() {
-        leftMotor.forward();
-        rightMotor.forward();
+        leftMotor.backward();
+        rightMotor.backward();
     }
 
     void stopMotors() {
