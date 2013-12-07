@@ -1,4 +1,5 @@
-To compile this, go to a command prompt in this directory, and run:
+To compile this, first, rename `compile` to `compile.bat`.  Now, go to
+a command prompt in this directory, and run:
 
     compile.bat
 

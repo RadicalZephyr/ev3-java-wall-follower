@@ -1,3 +1,4 @@
-
+@echo off
+ren lein lein.bat
 lein.bat self-install
 lein.bat uberjar
