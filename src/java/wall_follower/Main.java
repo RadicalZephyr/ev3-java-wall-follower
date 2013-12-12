@@ -117,6 +117,10 @@ public class Main
             curReading = readSensors();
 
             evaluateLastMove(prevReading, curReading);
+
+            if (Button.readButtons() != 0) {
+                done = true;
+            }
         }
     }
 
