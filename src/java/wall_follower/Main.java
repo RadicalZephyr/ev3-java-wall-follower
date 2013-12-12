@@ -115,6 +115,8 @@ public class Main
         while (!done) {
             prevReading = curReading;
             curReading = readSensors();
+
+            evaluateLastMove(prevReading, curReading);
         }
     }
 
@@ -123,9 +125,17 @@ public class Main
         return r;
     }
 
+    void evaluateLastMove(SensorReading previous, SensorReading current) {
+
+    }
+
     private class SensorReading {
         public float distance;
         public boolean leftTouching;
         public boolean rightTouching;
+    }
+
+    private class Move {
+
     }
 }
