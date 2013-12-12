@@ -99,9 +99,9 @@ public class Main
     }
 
     void stopMotors() {
-        leftMotor.stop();
+        leftMotor.stop(true);
         rightMotor.stop();
-        leftMotor.flt();
+        leftMotor.flt(true);
         rightMotor.flt();
     }
 
@@ -115,8 +115,8 @@ public class Main
         startMotors();
         ArrayList<Move> moves = new ArrayList<Move>();
         Move move = new Move();
-        move.leftSpeed = -100;
-        move.rightSpeed = -100;
+        move.leftSpeed = -300;
+        move.rightSpeed = -300;
         move.duration = 1000;
         moves.add(move);
         SensorReading prevReading;
