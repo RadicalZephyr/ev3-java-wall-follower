@@ -11,9 +11,8 @@ package wall_follower;
 
 public class MoveFitness {
 
-    // TODO: fix these values!!! Set arbitrarily for right now
     private static final float MIN_GOOD_DISTANCE = 0.1f;
-    private static final float MAX_GOOD_DISTANCE = 1.0f;
+    private static final float MAX_GOOD_DISTANCE = 0.15f;
 
     private int goodMoves;
     private int badMoves;
