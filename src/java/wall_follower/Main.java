@@ -200,11 +200,11 @@ public class Main
         TreeSet<Move> rightPressed;
         TreeSet<Move> leftAndRight;
 
-        public MovePopulation {
-            nonePressed = new TreeSet<Move>();
-            leftPressed = new TreeSet<Move>();
-            rightPressed = new TreeSet<Move>();
-            leftAndRight = new TreeSet<Move>();
+        public MovePopulation() {
+            this.nonePressed = new TreeSet<Move>();
+            this.leftPressed = new TreeSet<Move>();
+            this.rightPressed = new TreeSet<Move>();
+            this.leftAndRight = new TreeSet<Move>();
         }
 
         public void add(Move move) {
