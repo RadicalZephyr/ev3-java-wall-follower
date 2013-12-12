@@ -36,7 +36,6 @@ import lejos.utility.Delay;
 
 public class Main
 {
-
     private EV3TouchSensor leftTouch;
     private EV3TouchSensor rightTouch;
 
@@ -109,11 +108,19 @@ public class Main
 
     void followWall() {
         startMotors();
+        SensorReading prevReading = readSensors();
+        SensorReading curReading = readSensors();
         boolean done = false;
 
         while (!done) {
-
+            prevReading = curReading;
+            curReading = readSensors();
         }
+    }
+
+    SensorReading readSensors() {
+        SensorReading r = new SensorReading();
+        return r;
     }
 
     private class SensorReading {
