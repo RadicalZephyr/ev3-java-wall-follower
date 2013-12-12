@@ -8,6 +8,7 @@
 package wall_follower;
 
 import java.lang.Comparable;
+import java.util.Comparator;
 
 import java.util.Random;
 
@@ -71,8 +72,16 @@ public class Move  implements Comparable<Move> {
     }
 
     @Override
-        public int compareTo(Move m) {
+    public int compareTo(Move m) {
         Float mine = new Float(this.minDistance);
         return mine.compareTo(m.minDistance);
+    }
+
+    public static class CompareFitness implements Comparator<Move> {
+
+        @Override
+        public int compare(Move l, Move r) {
+            return l.compareTo(r);
+        }
     }
 }
