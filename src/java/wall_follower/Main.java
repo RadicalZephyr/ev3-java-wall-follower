@@ -38,6 +38,7 @@ import java.lang.Comparable;
 
 import java.util.List;
 import java.util.ArrayList;
+import java.util.TreeSet;
 
 public class Main
 {
@@ -192,5 +193,16 @@ public class Main
     }
 
     private class MovePopulation {
+        TreeSet<Move> nonePressed;
+        TreeSet<Move> leftPressed;
+        TreeSet<Move> rightPressed;
+        TreeSet<Move> leftAndRight;
+
+        public MovePopulation {
+            nonePressed = new TreeSet<Move>();
+            leftPressed = new TreeSet<Move>();
+            rightPressed = new TreeSet<Move>();
+            leftAndRight = new TreeSet<Move>();
+        }
     }
 }
