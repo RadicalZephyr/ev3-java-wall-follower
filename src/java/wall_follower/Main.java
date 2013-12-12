@@ -65,17 +65,17 @@ public class Main
     }
 
     void setupSensors() {
-        leftTouch = new EV3TouchSensor(SensorPort.S4);
-        rightTouch = new EV3TouchSensor(SensorPort.S3);
+        leftTouch = new EV3TouchSensor(SensorPort.S1);
+        rightTouch = new EV3TouchSensor(SensorPort.S4);
 
-        distance = new EV3UltrasonicSensor(SensorPort.S1);
+        distance = new EV3UltrasonicSensor(SensorPort.S2);
         distance.enable();
         distanceSampler = distance.getDistanceMode();
     }
 
     void setupMotors() {
-        leftMotor = Motor.C;
-        rightMotor = Motor.B;
+        leftMotor = Motor.B;
+        rightMotor = Motor.C;
         leftMotor.setAcceleration(3000);
         rightMotor.setAcceleration(3000);
         leftMotor.setSpeed(200);
