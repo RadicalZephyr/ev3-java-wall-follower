@@ -74,10 +74,13 @@ public class MovePopulation {
 
     /**
      *  This method MUST ensure that getMoveForReading will find at
-     *  least one legal move.  It is used to populate populations on
+     *  least one legal move.  It is used to generate populations on
      *  the fly for new situations.
      */
     public void seedPopulationForReading(SensorReading reading) {
-
+        NavigableSet<Move> set = getSetForMove(new Move(reading));
+        for (int i = 0; i < 10; i++) {
+            set.add(new Move(reading, rand));
+        }
     }
 }
