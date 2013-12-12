@@ -9,8 +9,19 @@ package wall_follower;
 
 import java.lang.Comparable;
 
+import java.util.Random;
+
 public class Move  implements Comparable<Move> {
+
+    // In ??? units.  Meters???
     public static final float DISTANCE_RANGE = 5.0f;
+
+    // In degrees per second
+    public static final int MAX_MOTOR_SPEED = 300;
+
+    // In milliseconds
+    public static final int MAX_DURATION = 1000;
+
 
     float minDistance;
     // maxDistance is a constant value larger than minDistance
@@ -22,6 +33,30 @@ public class Move  implements Comparable<Move> {
     int duration;
 
     MoveFitness fitness;
+
+    public Move(SensorReading r) {
+        minDistance = r.distance;
+        leftPressed = r.leftPressed;
+        rightPressed = r.rightPressed;
+
+        leftSpeed = 0;
+        rightSpeed = 0;
+        duration = 0;
+    }
+
+    public Move(SensorReading r, Random rand) {
+        this(r);
+        // Randomly distribute the minDistance over a range that will
+        // always include the distance from the SensorReading
+        float n = rand.nextFloat();
+        n *= -DISTANCE_RANGE;
+        minDistance += n;
+
+        leftSpeed = -(rand.nextInt(MAX_MOTOR_SPEED));
+        rightSpeed = -(rand.nextInt(MAX_MOTOR_SPEED));
+
+        duration = rand.nextInt(MAX_DURATION);
+    }
 
     @Override
         public int compareTo(Move m) {

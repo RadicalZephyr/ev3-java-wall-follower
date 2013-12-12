@@ -40,9 +40,8 @@ public class MovePopulation {
     }
 
     public Move getMoveForReading(SensorReading reading) {
-        Move minMove = new Move();
-        Move move = new Move();
-        move.minDistance = reading.distance;
+        Move move = new Move(reading);
+        Move minMove = new Move(reading);
         minMove.minDistance = reading.distance - Move.DISTANCE_RANGE;
 
         NavigableSet<Move> legalMoves;
