@@ -13,11 +13,11 @@ import java.util.TreeSet;
 
 
 public class MovePopulation {
-    TreeSet<Move> nonePressed;
-    TreeSet<Move> leftPressed;
-    TreeSet<Move> rightPressed;
-    TreeSet<Move> leftAndRight;
-    Random rand;
+    private TreeSet<Move> nonePressed;
+    private TreeSet<Move> leftPressed;
+    private TreeSet<Move> rightPressed;
+    private TreeSet<Move> leftAndRight;
+    private Random rand;
 
     public MovePopulation(Random rand) {
         this.rand = rand;
