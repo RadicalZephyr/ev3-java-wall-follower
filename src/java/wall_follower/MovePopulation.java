@@ -8,9 +8,13 @@
 package wall_follower;
 
 import java.util.Random;
+import java.util.Collections;
+
 import java.util.NavigableSet;
 import java.util.TreeSet;
 
+import java.util.List;
+import java.util.ArrayList;
 
 public class MovePopulation {
 
@@ -113,5 +117,13 @@ public class MovePopulation {
     private void incrementGeneration() {
         generation++;
         iteration = 0;
+
+        List<Move> allMoves = new ArrayList<Move>();
+        allMoves.addAll(leftAndRight);
+        allMoves.addAll(leftPressed);
+        allMoves.addAll(rightPressed);
+        allMoves.addAll(nonePressed);
+
+        Collections.sort(allMoves, new Move.CompareFitness());
     }
 }
