@@ -34,13 +34,10 @@ import lejos.robotics.SampleProvider;
 
 import lejos.utility.Delay;
 
-import java.lang.Comparable;
-
 import java.util.Random;
+
 import java.util.List;
 import java.util.ArrayList;
-import java.util.TreeSet;
-import java.util.NavigableSet;
 
 public class Main
 {
@@ -120,7 +117,7 @@ public class Main
     }
 
     void followWall() {
-        MovePopulation population = new MovePopulation();
+        MovePopulation population = new MovePopulation(rand);
 
         Move move;
         SensorReading prevReading;
@@ -134,9 +131,7 @@ public class Main
             prevReading = curReading;
             curReading = readSensors();
 
-            if (lastMoveWasGood(prevReading, curReading)) {
-
-            }
+            evaluateLastMove(move, prevReading, curReading);
 
             if (Button.readButtons() != 0) {
                 done = true;
@@ -160,94 +155,9 @@ public class Main
         return r;
     }
 
-    boolean lastMoveWasGood(SensorReading previous,
-                            SensorReading current) {
-        return false;
+    void evaluateLastMove(Move move,
+                          SensorReading previous,
+                          SensorReading current) {
     }
 
-    private class SensorReading {
-        public float distance;
-        public boolean leftPressed;
-        public boolean rightPressed;
-    }
-
-    private class Move implements Comparable<Move> {
-        public static final float DISTANCE_RANGE = 5.0f;
-
-        float minDistance;
-        // maxDistance is a constant value larger than minDistance
-        boolean leftPressed;
-        boolean rightPressed;
-
-        int leftSpeed;
-        int rightSpeed;
-        int duration;
-
-        @Override
-        public int compareTo(Move m) {
-            Float mine = new Float(this.minDistance);
-            return mine.compareTo(m.minDistance);
-        }
-    }
-
-    private class MovePopulation {
-        TreeSet<Move> nonePressed;
-        TreeSet<Move> leftPressed;
-        TreeSet<Move> rightPressed;
-        TreeSet<Move> leftAndRight;
-
-        public MovePopulation() {
-            this.nonePressed = new TreeSet<Move>();
-            this.leftPressed = new TreeSet<Move>();
-            this.rightPressed = new TreeSet<Move>();
-            this.leftAndRight = new TreeSet<Move>();
-        }
-
-        public void add(Move move) {
-            if (move.leftPressed && move.rightPressed) {
-                leftAndRight.add(move);
-            } else if (move.leftPressed) {
-                leftPressed.add(move);
-            } else if (move.rightPressed) {
-                rightPressed.add(move);
-            } else {
-                nonePressed.add(move);
-            }
-        }
-
-        public Move getMoveForReading(SensorReading reading) {
-            Move minMove = new Move();
-            Move move = new Move();
-            move.minDistance = reading.distance;
-            minMove.minDistance = reading.distance - Move.DISTANCE_RANGE;
-
-            NavigableSet<Move> legalMoves;
-
-            if (move.leftPressed && move.rightPressed) {
-                legalMoves = leftAndRight.subSet(minMove, true,
-                                                 move, true);
-            } else if (move.leftPressed) {
-                legalMoves = leftPressed.subSet(minMove, true,
-                                                move, true);
-            } else if (move.rightPressed) {
-                legalMoves = rightPressed.subSet(minMove, true,
-                                                 move, true);
-            } else {
-                legalMoves = nonePressed.subSet(minMove, true,
-                                                move, true);
-            }
-
-            Move finalMove = legalMoves.first();
-            int size = legalMoves.size();
-            int item = rand.nextInt(size);
-            int i = 0;
-            for (Move m : legalMoves) {
-                if (i == item) {
-                    finalMove = m;
-                }
-                i++;
-            }
-            return finalMove;
-        }
-    }
 }
