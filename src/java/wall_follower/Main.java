@@ -115,4 +115,10 @@ public class Main
     void followWall() {
 
     }
+
+    private class SensorReading {
+        public float distance;
+        public boolean leftTouching;
+        public boolean rightTouching;
+    }
 }
