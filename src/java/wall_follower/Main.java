@@ -43,6 +43,7 @@ public class Main
     private NXTRegulatedMotor rightMotor;
 
     private EV3UltrasonicSensor distance;
+    private SampleProvider distanceSampler;
 
     public static void main(String[] args) {
         Main current = new Main();
@@ -66,6 +67,7 @@ public class Main
 
         distance = new EV3UltrasonicSensor(SensorPort.S1);
         distance.enable();
+        distanceSampler = distance.getDistanceMode();
     }
 
     void setupMotors() {
@@ -100,7 +102,7 @@ public class Main
         rightMotor.flt();
     }
 
-    float checkDistance(SampleProvider distanceSampler) {
+    float checkDistance() {
         float[] distance = new float[1];
         distanceSampler.fetchSample(distance, 0);
         return distance[0];
@@ -126,6 +128,9 @@ public class Main
 
     SensorReading readSensors() {
         SensorReading r = new SensorReading();
+        r.distance = checkDistance();
+        r.leftTouching = leftTouch.isPressed();
+        r.rightTouching = rightTouch.isPressed();
         return r;
     }
 
