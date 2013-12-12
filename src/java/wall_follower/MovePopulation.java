@@ -61,6 +61,11 @@ public class MovePopulation {
                                             move, true);
         }
 
+        if (legalMoves.size() == 0) {
+            seedPopulationForReading(reading);
+            return getMoveForReading(reading);
+        }
+
         Move finalMove = legalMoves.first();
         int size = legalMoves.size();
         int item = rand.nextInt(size);
@@ -72,5 +77,14 @@ public class MovePopulation {
             i++;
         }
         return finalMove;
+    }
+
+    /**
+     *  This method MUST ensure that getMoveForReading will find at
+     *  least one legal move.  It is used to populate populations on
+     *  the fly for new situations.
+     */
+    public void seedPopulationForReading(SensorReading reading) {
+
     }
 }
