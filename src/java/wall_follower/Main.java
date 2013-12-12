@@ -34,6 +34,9 @@ import lejos.robotics.SampleProvider;
 
 import lejos.utility.Delay;
 
+import java.util.List;
+import java.util.ArrayList;
+
 public class Main
 {
     private EV3TouchSensor leftTouch;
@@ -110,20 +113,36 @@ public class Main
 
     void followWall() {
         startMotors();
-        SensorReading prevReading = readSensors();
-        SensorReading curReading = readSensors();
-        boolean done = false;
+        ArrayList<Move> moves = new ArrayList<Move>();
 
+        SensorReading prevReading;
+        SensorReading curReading = readSensors();
+        Move move;
+
+        boolean done = false;
         while (!done) {
+            move = chooseMove(moves, curReading);
+            execute(move);
+
             prevReading = curReading;
             curReading = readSensors();
 
-            evaluateLastMove(prevReading, curReading);
+            if (lastMoveWasGood(prevReading, curReading)) {
+
+            }
 
             if (Button.readButtons() != 0) {
                 done = true;
             }
         }
+    }
+
+    Move chooseMove(List<Move> moves, SensorReading reading) {
+        return moves.get(0);
+    }
+
+    void execute(Move move) {
+
     }
 
     SensorReading readSensors() {
@@ -134,8 +153,9 @@ public class Main
         return r;
     }
 
-    void evaluateLastMove(SensorReading previous, SensorReading current) {
-
+    boolean lastMoveWasGood(SensorReading previous,
+                            SensorReading current) {
+        return false;
     }
 
     private class SensorReading {
