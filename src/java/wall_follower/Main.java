@@ -114,10 +114,14 @@ public class Main
     void followWall() {
         startMotors();
         ArrayList<Move> moves = new ArrayList<Move>();
-
+        Move move = new Move();
+        move.leftSpeed = -100;
+        move.rightSpeed = -100;
+        move.duration = 1000;
+        moves.add(move);
         SensorReading prevReading;
         SensorReading curReading = readSensors();
-        Move move;
+
 
         boolean done = false;
         while (!done) {
