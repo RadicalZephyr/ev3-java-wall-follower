@@ -216,5 +216,20 @@ public class Main
                 nonePressed.add(move);
             }
         }
+
+        public void getForReading(SensorReading reading) {
+            Move move = new Move();
+            move.minDistance = reading.distance;
+
+            if (move.leftPressed && move.rightPressed) {
+                leftAndRight.floor(move);
+            } else if (move.leftPressed) {
+                leftPressed.floor(move);
+            } else if (move.rightPressed) {
+                rightPressed.floor(move);
+            } else {
+                nonePressed.floor(move);
+            }
+        }
     }
 }
