@@ -18,6 +18,11 @@ public class MoveFitness {
     private int goodMoves;
     private int badMoves;
 
+    public MoveFitness() {
+        goodMoves = 0;
+        badMoves = 0;
+    }
+
     /**
      *  Overall, the way that we score moves is this: there is a
      *  predefined "good" range.  If the move caused us to stay in
@@ -54,6 +59,8 @@ public class MoveFitness {
     }
 
     public float getFitness() {
+        if (badMoves == 0)
+            return goodMoves;
         return goodMoves / badMoves;
     }
 
