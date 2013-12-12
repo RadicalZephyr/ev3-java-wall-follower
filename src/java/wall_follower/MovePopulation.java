@@ -28,15 +28,8 @@ public class MovePopulation {
     }
 
     public void add(Move move) {
-        if (move.leftPressed && move.rightPressed) {
-            leftAndRight.add(move);
-        } else if (move.leftPressed) {
-            leftPressed.add(move);
-        } else if (move.rightPressed) {
-            rightPressed.add(move);
-        } else {
-            nonePressed.add(move);
-        }
+        NavigableSet<Move> set = getSetForMove(move);
+        set.add(move);
     }
 
     public Move getMoveForReading(SensorReading reading) {
@@ -44,21 +37,10 @@ public class MovePopulation {
         Move minMove = new Move(reading);
         minMove.minDistance = reading.distance - Move.DISTANCE_RANGE;
 
-        NavigableSet<Move> legalMoves;
+        NavigableSet<Move> set = getSetForMove(move);
 
-        if (move.leftPressed && move.rightPressed) {
-            legalMoves = leftAndRight.subSet(minMove, true,
+        NavigableSet<Move> legalMoves = set.subSet(minMove, true,
                                              move, true);
-        } else if (move.leftPressed) {
-            legalMoves = leftPressed.subSet(minMove, true,
-                                            move, true);
-        } else if (move.rightPressed) {
-            legalMoves = rightPressed.subSet(minMove, true,
-                                             move, true);
-        } else {
-            legalMoves = nonePressed.subSet(minMove, true,
-                                            move, true);
-        }
 
         if (legalMoves.size() == 0) {
             seedPopulationForReading(reading);
@@ -76,6 +58,18 @@ public class MovePopulation {
             i++;
         }
         return finalMove;
+    }
+
+    private NavigableSet<Move> getSetForMove(Move move) {
+        if (move.leftPressed && move.rightPressed) {
+            return leftAndRight;
+        } else if (move.leftPressed) {
+            return leftPressed;
+        } else if (move.rightPressed) {
+            return rightPressed;
+        } else {
+            return nonePressed;
+        }
     }
 
     /**
