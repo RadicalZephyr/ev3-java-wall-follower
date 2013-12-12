@@ -21,7 +21,8 @@ public class Move  implements Comparable<Move> {
     public static final int MAX_MOTOR_SPEED = 300;
 
     // In milliseconds
-    public static final int MAX_DURATION = 1000;
+    public static final int MIN_DURATION = 500;
+    public static final int MAX_DURATION = 2000;
 
 
     float minDistance;
@@ -66,7 +67,7 @@ public class Move  implements Comparable<Move> {
             rightSpeed *= -1;
         }
 
-        duration = rand.nextInt(MAX_DURATION);
+        duration = rand.nextInt(MAX_DURATION-MIN_DURATION)+MIN_DURATION;
     }
 
     @Override
