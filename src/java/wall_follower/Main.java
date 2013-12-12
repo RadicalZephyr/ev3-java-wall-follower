@@ -34,6 +34,8 @@ import lejos.robotics.SampleProvider;
 
 import lejos.utility.Delay;
 
+import java.lang.Comparable;
+
 import java.util.List;
 import java.util.ArrayList;
 
@@ -172,7 +174,7 @@ public class Main
         public boolean rightPressed;
     }
 
-    private class Move {
+    private class Move implements Comparable<Move> {
         float minDistance;
         float maxDistance;
         boolean leftPressed;
@@ -181,5 +183,14 @@ public class Main
         int leftSpeed;
         int rightSpeed;
         int duration;
+
+        @Override
+        public int compareTo(Move m) {
+            Float mine = new Float(this.minDistance);
+            return mine.compareTo(m.minDistance);
+        }
+    }
+
+    private class MovePopulation {
     }
 }
