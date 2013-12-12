@@ -58,6 +58,12 @@ public class Move  implements Comparable<Move> {
         rightSpeed = -(rand.nextInt(MAX_MOTOR_SPEED-MIN_MOTOR_SPEED)+
                        MIN_MOTOR_SPEED);
 
+        // Invert motor direction if both touch sensors are pressed
+        if (leftPressed && rightPressed) {
+            leftSpeed *= -1;
+            rightSpeed *= -1;
+        }
+
         duration = rand.nextInt(MAX_DURATION);
     }
 
