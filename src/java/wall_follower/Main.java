@@ -50,7 +50,7 @@ public class Main
         boolean done = false;
         LCD.clear();
         current.promptForStartPush();
-        current.mainLoop();
+        current.followWall();
         LCD.clear();
         LCD.drawString("Done!", 1, 1);
         Delay.msDelay(1000);
@@ -101,11 +101,6 @@ public class Main
         rightMotor.flt();
     }
 
-    void mainLoop() {
-        startMotors();
-        followWall();
-    }
-
     float checkDistance(SampleProvider distanceSampler) {
         float[] distance = new float[1];
         distanceSampler.fetchSample(distance, 0);
@@ -113,7 +108,12 @@ public class Main
     }
 
     void followWall() {
+        startMotors();
+        boolean done = false;
 
+        while (!done) {
+
+        }
     }
 
     private class SensorReading {
