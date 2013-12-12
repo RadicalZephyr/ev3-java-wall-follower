@@ -220,17 +220,25 @@ public class Main
         }
 
         public void getForReading(SensorReading reading) {
+            Move minMove = new Move();
             Move move = new Move();
             move.minDistance = reading.distance;
+            minMove.minDistance = reading.distance - Move.DISTANCE_RANGE;
+
+            NavigableSet<Move> legalMoves;
 
             if (move.leftPressed && move.rightPressed) {
-                leftAndRight.floor(move);
+                legalMoves = leftAndRight.subSet(minMove, true,
+                                                 move, true);
             } else if (move.leftPressed) {
-                leftPressed.floor(move);
+                legalMoves = leftPressed.subSet(minMove, true,
+                                                move, true);
             } else if (move.rightPressed) {
-                rightPressed.floor(move);
+                legalMoves = rightPressed.subSet(minMove, true,
+                                                 move, true);
             } else {
-                nonePressed.floor(move);
+                legalMoves = nonePressed.subSet(minMove, true,
+                                                move, true);
             }
         }
     }
