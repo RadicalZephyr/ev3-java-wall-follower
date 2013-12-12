@@ -40,6 +40,7 @@ import java.util.Random;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.TreeSet;
+import java.util.NavigableSet;
 
 public class Main
 {
@@ -223,7 +224,7 @@ public class Main
             }
         }
 
-        public void getForReading(SensorReading reading) {
+        public Move getMoveForReading(SensorReading reading) {
             Move minMove = new Move();
             Move move = new Move();
             move.minDistance = reading.distance;
@@ -244,6 +245,18 @@ public class Main
                 legalMoves = nonePressed.subSet(minMove, true,
                                                 move, true);
             }
+
+            Move finalMove = legalMoves.first();
+            int size = legalMoves.size();
+            int item = rand.nextInt(size);
+            int i = 0;
+            for (Move m : legalMoves) {
+                if (i == item) {
+                    finalMove = m;
+                }
+                i++;
+            }
+            return finalMove;
         }
     }
 }
