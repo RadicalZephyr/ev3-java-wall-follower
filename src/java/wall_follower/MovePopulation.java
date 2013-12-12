@@ -60,12 +60,20 @@ public class MovePopulation {
         return finalMove;
     }
 
+    private NavigableSet<Move> getSetForReading(SensorReading reading) {
+        return getSet(reading.leftPressed, reading.rightPressed);
+    }
+
     private NavigableSet<Move> getSetForMove(Move move) {
-        if (move.leftPressed && move.rightPressed) {
-            return leftAndRight;
-        } else if (move.leftPressed) {
+        return getSet(move.leftPressed, move.rightPressed);
+    }
+
+    private NavigableSet<Move> getSet(boolean left, boolean right) {
+        if (left && right) {
+          return leftAndRight;
+        } else if (left) {
             return leftPressed;
-        } else if (move.rightPressed) {
+        } else if (right) {
             return rightPressed;
         } else {
             return nonePressed;
@@ -78,7 +86,7 @@ public class MovePopulation {
      *  the fly for new situations.
      */
     public void seedPopulationForReading(SensorReading reading) {
-        NavigableSet<Move> set = getSetForMove(new Move(reading));
+        NavigableSet<Move> set = getSetForReading(reading);
         for (int i = 0; i < 10; i++) {
             set.add(new Move(reading, rand));
         }
