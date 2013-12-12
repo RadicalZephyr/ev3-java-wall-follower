@@ -36,6 +36,7 @@ import lejos.utility.Delay;
 
 import java.lang.Comparable;
 
+import java.util.Random;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.TreeSet;
@@ -51,6 +52,8 @@ public class Main
     private EV3UltrasonicSensor distance;
     private SampleProvider distanceSampler;
 
+    private Random rand;
+
     public static void main(String[] args) {
         Main current = new Main();
         boolean done = false;
@@ -63,6 +66,7 @@ public class Main
     }
 
     public Main() {
+        rand = new Random();
         setupSensors();
         setupMotors();
     }
