@@ -124,6 +124,32 @@ public class MovePopulation {
         allMoves.addAll(rightPressed);
         allMoves.addAll(nonePressed);
 
+        // Empty the current population
+        // NOTE: Instead of clearing these, I could use retainAll once
+        // a final population has been generated.
+        leftAndRight.clear();
+        leftPressed.clear();
+        rightPressed.clear();
+        nonePressed.clear();
+
+        // Do a steady-state selection, order by fitness value
         Collections.sort(allMoves, new Move.CompareFitness());
+
+        // Now, discard the bottom percentage.  Somewhere between the
+        // bottom third and bottom sixth will be discarded.
+        int size = allMoves.size();
+        int cutoff = (int)size/(rand.nextInt(3)+3);
+
+        // Now practice elitism.  The top three will be copied
+        // straight to the next population.
+        for (Move m : allMoves.subList(size-3, size)) {
+            add(m);
+        }
+
+        breedIndividuals(allMoves.subList(cutoff, size));
+    }
+
+    private void breedIndividuals(List<Move> breeders) {
+        Collections.shuffle(breeders, rand);
     }
 }
