@@ -131,7 +131,7 @@ public class Main
             prevReading = curReading;
             curReading = readSensors();
 
-            evaluateLastMove(move, prevReading, curReading);
+            move.fitness.scoreMove(prevReading, curReading);
 
             if (Button.readButtons() != 0) {
                 done = true;
@@ -153,11 +153,6 @@ public class Main
         r.leftPressed = leftTouch.isPressed();
         r.rightPressed = rightTouch.isPressed();
         return r;
-    }
-
-    void evaluateLastMove(Move move,
-                          SensorReading previous,
-                          SensorReading current) {
     }
 
 }
