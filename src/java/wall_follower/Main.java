@@ -120,20 +120,15 @@ public class Main
     }
 
     void followWall() {
-        startMotors();
-        ArrayList<Move> moves = new ArrayList<Move>();
-        Move move = new Move();
-        move.leftSpeed = -300;
-        move.rightSpeed = -300;
-        move.duration = 1000;
-        moves.add(move);
+        MovePopulation population = new MovePopulation();
+
+        Move move;
         SensorReading prevReading;
         SensorReading curReading = readSensors();
 
-
         boolean done = false;
         while (!done) {
-            move = chooseMove(moves, curReading);
+            move = population.getMoveForReading(curReading);
             execute(move);
 
             prevReading = curReading;
@@ -147,10 +142,6 @@ public class Main
                 done = true;
             }
         }
-    }
-
-    Move chooseMove(List<Move> moves, SensorReading reading) {
-        return moves.get(0);
     }
 
     void execute(Move move) {
