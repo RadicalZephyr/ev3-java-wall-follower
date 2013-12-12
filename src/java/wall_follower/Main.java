@@ -176,8 +176,10 @@ public class Main
     }
 
     private class Move implements Comparable<Move> {
+        public static final float DISTANCE_RANGE = 5.0f;
+
         float minDistance;
-        float maxDistance;
+        // maxDistance is a constant value larger than minDistance
         boolean leftPressed;
         boolean rightPressed;
 
