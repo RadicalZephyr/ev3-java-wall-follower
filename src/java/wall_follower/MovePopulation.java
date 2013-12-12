@@ -13,13 +13,25 @@ import java.util.TreeSet;
 
 
 public class MovePopulation {
+
+    private static final int BASE_ITERATIONS_PER_GEN = 10;
+    private static final int ITERATIONS_MULTIPLIER = 2;
+
     private TreeSet<Move> nonePressed;
     private TreeSet<Move> leftPressed;
     private TreeSet<Move> rightPressed;
     private TreeSet<Move> leftAndRight;
     private Random rand;
 
+    private int generation;
+    private int iteration;
+    private int nextGeneration;
+
     public MovePopulation(Random rand) {
+        generation = 0;
+        iteration = 0;
+        nextGeneration = BASE_ITERATIONS_PER_GEN;
+
         this.rand = rand;
         this.nonePressed = new TreeSet<Move>();
         this.leftPressed = new TreeSet<Move>();
@@ -33,6 +45,12 @@ public class MovePopulation {
     }
 
     public Move getMoveForReading(SensorReading reading) {
+        // Assume that get is run once for each iteration
+        iteration++;
+        if (iteration >= nextGeneration) {
+            incrementGeneration();
+        }
+
         Move move = new Move(reading);
         Move minMove = new Move(reading);
         minMove.minDistance = reading.distance - Move.DISTANCE_RANGE;
@@ -90,5 +108,10 @@ public class MovePopulation {
         for (int i = 0; i < 10; i++) {
             set.add(new Move(reading, rand));
         }
+    }
+
+    private void incrementGeneration() {
+        generation++;
+        iteration = 0;
     }
 }
