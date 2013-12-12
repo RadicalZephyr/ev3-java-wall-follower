@@ -17,6 +17,7 @@ public class Move  implements Comparable<Move> {
     public static final float DISTANCE_RANGE = 5.0f;
 
     // In degrees per second
+    public static final int MIN_MOTOR_SPEED = 50;
     public static final int MAX_MOTOR_SPEED = 300;
 
     // In milliseconds
@@ -52,8 +53,10 @@ public class Move  implements Comparable<Move> {
         n *= -DISTANCE_RANGE;
         minDistance += n;
 
-        leftSpeed = -(rand.nextInt(MAX_MOTOR_SPEED));
-        rightSpeed = -(rand.nextInt(MAX_MOTOR_SPEED));
+        leftSpeed = -(rand.nextInt(MAX_MOTOR_SPEED-MIN_MOTOR_SPEED)+
+                       MIN_MOTOR_SPEED);
+        rightSpeed = -(rand.nextInt(MAX_MOTOR_SPEED-MIN_MOTOR_SPEED)+
+                       MIN_MOTOR_SPEED);
 
         duration = rand.nextInt(MAX_DURATION);
     }
