@@ -204,5 +204,17 @@ public class Main
             rightPressed = new TreeSet<Move>();
             leftAndRight = new TreeSet<Move>();
         }
+
+        public void add(Move move) {
+            if (move.leftPressed && move.rightPressed) {
+                leftAndRight.add(move);
+            } else if (move.leftPressed) {
+                leftPressed.add(move);
+            } else if (move.rightPressed) {
+                rightPressed.add(move);
+            } else {
+                nonePressed.add(move);
+            }
+        }
     }
 }
