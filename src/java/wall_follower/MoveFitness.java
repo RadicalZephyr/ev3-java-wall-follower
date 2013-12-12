@@ -9,7 +9,9 @@
 
 package wall_follower;
 
-public class MoveFitness {
+import java.lang.Comparable;
+
+public class MoveFitness implements Comparable<MoveFitness> {
 
     private static final float MIN_GOOD_DISTANCE = 0.1f;
     private static final float MAX_GOOD_DISTANCE = 0.15f;
@@ -67,4 +69,11 @@ public class MoveFitness {
         return (distance >= MIN_GOOD_DISTANCE) &&
             (distance <= MAX_GOOD_DISTANCE);
     }
+
+    @Override
+    public int compareTo(MoveFitness m) {
+        Float mine = new Float(getFitness());
+        return mine.compareTo(m.getFitness());
+    }
+
 }
