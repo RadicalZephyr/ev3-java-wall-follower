@@ -142,14 +142,18 @@ public class Main
     }
 
     void execute(Move move) {
-
+        leftMotor.setSpeed(move.leftSpeed);
+        rightMotor.setSpeed(move.rightSpeed);
+        startMotors();
+        Delay.msDelay(move.duration);
+        stopMotors();
     }
 
     SensorReading readSensors() {
         SensorReading r = new SensorReading();
         r.distance = checkDistance();
-        r.leftTouching = leftTouch.isPressed();
-        r.rightTouching = rightTouch.isPressed();
+        r.leftPressed = leftTouch.isPressed();
+        r.rightPressed = rightTouch.isPressed();
         return r;
     }
 
@@ -160,11 +164,18 @@ public class Main
 
     private class SensorReading {
         public float distance;
-        public boolean leftTouching;
-        public boolean rightTouching;
+        public boolean leftPressed;
+        public boolean rightPressed;
     }
 
     private class Move {
+        float minDistance;
+        float maxDistance;
+        boolean leftPressed;
+        boolean rightPressed;
 
+        int leftSpeed;
+        int rightSpeed;
+        int duration;
     }
 }
