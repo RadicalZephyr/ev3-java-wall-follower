@@ -16,7 +16,12 @@ import java.util.TreeSet;
 import java.util.List;
 import java.util.ArrayList;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 public class MovePopulation {
+
+    final Logger logger = LoggerFactory.getLogger(MovePopulation.class);
 
     private static final int BASE_ITERATIONS_PER_GEN = 10;
     private static final int ITERATIONS_MULTIPLIER = 2;

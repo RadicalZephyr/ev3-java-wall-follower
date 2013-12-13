@@ -39,8 +39,13 @@ import java.util.Random;
 import java.util.List;
 import java.util.ArrayList;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 public class Main
 {
+    final Logger logger = LoggerFactory.getLogger(Main.class);
+
     private EV3TouchSensor leftTouch;
     private EV3TouchSensor rightTouch;
 

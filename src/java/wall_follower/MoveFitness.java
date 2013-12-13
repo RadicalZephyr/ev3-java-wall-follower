@@ -11,7 +11,12 @@ package wall_follower;
 
 import java.lang.Comparable;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 public class MoveFitness implements Comparable<MoveFitness> {
+
+    final Logger logger = LoggerFactory.getLogger(MoveFitness.class);
 
     private static final float MIN_GOOD_DISTANCE = 0.1f;
     private static final float MAX_GOOD_DISTANCE = 0.15f;

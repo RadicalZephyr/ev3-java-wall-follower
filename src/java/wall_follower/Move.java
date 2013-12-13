@@ -12,7 +12,12 @@ import java.util.Comparator;
 
 import java.util.Random;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 public class Move  implements Comparable<Move> {
+
+    final Logger logger = LoggerFactory.getLogger(Move.class);
 
     // In ??? units.  Meters???
     public static final float DISTANCE_RANGE = 5.0f;
