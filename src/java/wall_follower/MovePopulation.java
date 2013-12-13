@@ -36,10 +36,14 @@ public class MovePopulation {
     private int iteration;
     private int nextGeneration;
 
+    private int totalPopulation;
+
     public MovePopulation(Random rand) {
         generation = 0;
         iteration = 0;
         nextGeneration = BASE_ITERATIONS_PER_GEN;
+
+        totalPopulation = 0;
 
         this.rand = rand;
         this.nonePressed = new TreeSet<Move>();
@@ -53,6 +57,7 @@ public class MovePopulation {
 
         NavigableSet<Move> set = getSetForMove(move);
         set.add(move);
+        totalPopulation++;
     }
 
     public Move getMoveForReading(SensorReading reading) {
@@ -122,6 +127,7 @@ public class MovePopulation {
         NavigableSet<Move> set = getSetForReading(reading);
         for (int i = 0; i < 10; i++) {
             set.add(new Move(reading, rand));
+            totalPopulation++;
         }
     }
 
@@ -145,6 +151,7 @@ public class MovePopulation {
         leftPressed.clear();
         rightPressed.clear();
         nonePressed.clear();
+        totalPopulation = 0;
 
         // Do a steady-state selection, order by fitness value
         Collections.sort(allMoves, new Move.CompareFitness());
