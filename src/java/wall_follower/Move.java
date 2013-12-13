@@ -19,11 +19,11 @@ public class Move  implements Comparable<Move> {
 
     final Logger logger = LoggerFactory.getLogger(Move.class);
 
-    // In ??? units.  Meters???
-    public static final float DISTANCE_RANGE = 5.0f;
+    // In meters apparently
+    public static final float DISTANCE_RANGE = 0.05f;
 
     // In degrees per second
-    public static final int MIN_MOTOR_SPEED = 50;
+    public static final int MIN_MOTOR_SPEED = 100;
     public static final int MAX_MOTOR_SPEED = 300;
 
     // In milliseconds
