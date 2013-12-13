@@ -36,6 +36,8 @@ public class Move  implements Comparable<Move> {
     boolean leftPressed;
     boolean rightPressed;
 
+    boolean invertMotor;
+
     int leftSpeed;
     int rightSpeed;
     int duration;
@@ -47,6 +49,8 @@ public class Move  implements Comparable<Move> {
 
         leftPressed = false;
         rightPressed = false;
+
+        invertMotor = false;
 
         leftSpeed = 0;
         rightSpeed = 0;
@@ -78,8 +82,7 @@ public class Move  implements Comparable<Move> {
 
         // Invert motor direction if both touch sensors are pressed
         if (leftPressed && rightPressed) {
-            leftSpeed *= -1;
-            rightSpeed *= -1;
+            invertMotor = true;
         }
 
         duration = rand.nextInt(MAX_DURATION-MIN_DURATION)+MIN_DURATION;

@@ -106,10 +106,15 @@ public class Main
         LCD.drawString("Running...", 1, 1);
     }
 
-    void startMotors() {
+    void startMotors(boolean invertMotors) {
         logger.trace("startMotors");
-        leftMotor.backward();
-        rightMotor.backward();
+        if (!invertMotors) {
+            leftMotor.backward();
+            rightMotor.backward();
+        } else {
+            leftMotor.forward();
+            rightMotor.forward();
+        }
     }
 
     void stopMotors() {
@@ -155,7 +160,7 @@ public class Main
         logger.trace("executeMove");
         leftMotor.setSpeed(move.leftSpeed);
         rightMotor.setSpeed(move.rightSpeed);
-        startMotors();
+        startMotors(move.invertMotor);
         Delay.msDelay(move.duration);
         stopMotors();
     }
