@@ -181,7 +181,7 @@ public class MovePopulation {
             add(m);
         }
 
-        breedReplacements(testedMoves.subList(cutoff, size), cutoff);
+        breedReplacements(testedMoves.subList(cutoff, size), cutoff+1);
         logger.debug("population size after: {}", totalPopulation);
     }
 
