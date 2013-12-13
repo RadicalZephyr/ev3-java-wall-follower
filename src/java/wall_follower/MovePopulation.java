@@ -62,7 +62,7 @@ public class MovePopulation {
         NavigableSet<Move> set = getSetForMove(move);
 
         NavigableSet<Move> legalMoves = set.subSet(minMove, true,
-                                             move, true);
+                                                   move, true);
 
         if (legalMoves.size() == 0) {
             seedPopulationForReading(reading);
@@ -92,7 +92,7 @@ public class MovePopulation {
 
     private NavigableSet<Move> getSet(boolean left, boolean right) {
         if (left && right) {
-          return leftAndRight;
+            return leftAndRight;
         } else if (left) {
             return leftPressed;
         } else if (right) {
