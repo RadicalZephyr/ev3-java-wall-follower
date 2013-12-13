@@ -49,11 +49,15 @@ public class MovePopulation {
     }
 
     public void add(Move move) {
+        logger.trace("addMove");
+
         NavigableSet<Move> set = getSetForMove(move);
         set.add(move);
     }
 
     public Move getMoveForReading(SensorReading reading) {
+        logger.trace("getMoveForReading");
+
         // Assume that get is run once for each iteration
         iteration++;
         if (iteration >= nextGeneration) {
@@ -113,6 +117,8 @@ public class MovePopulation {
      *  the fly for new situations.
      */
     public void seedPopulationForReading(SensorReading reading) {
+        logger.trace("seedPopulation");
+
         NavigableSet<Move> set = getSetForReading(reading);
         for (int i = 0; i < 10; i++) {
             set.add(new Move(reading, rand));
@@ -120,6 +126,8 @@ public class MovePopulation {
     }
 
     private void incrementGeneration() {
+        logger.trace("incrementGeneration");
+
         generation++;
         iteration = 0;
         nextGeneration *= ITERATIONS_MULTIPLIER;
@@ -170,6 +178,8 @@ public class MovePopulation {
     }
 
     private void breedReplacements(List<Move> breeders, int removed) {
+        logger.trace("breedReplacements");
+
         Collections.shuffle(breeders, rand);
 
         int size = breeders.size();
