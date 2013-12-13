@@ -71,6 +71,21 @@ public class Move  implements Comparable<Move> {
         duration = rand.nextInt(MAX_DURATION-MIN_DURATION)+MIN_DURATION;
     }
 
+    public Move breedWith(Move m) {
+
+    }
+
+    @Override
+    public String toString() {
+        return String.format("%+0.4f %d %d %4d %4d %4d",
+                             minDistance,
+                             leftPressed ? 1 : 0,
+                             rightPressed ? 1 : 0,
+                             leftSpeed,
+                             rightSpeed,
+                             duration);
+    }
+
     @Override
     public int compareTo(Move m) {
         Float mine = new Float(this.minDistance);
