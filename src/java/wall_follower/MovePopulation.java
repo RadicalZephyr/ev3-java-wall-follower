@@ -155,7 +155,8 @@ public class MovePopulation {
 
         // Now practice elitism.  The top three will be copied
         // straight to the next population.
-        for (Move m : testedMoves.subList(size-3, size)) {
+        int minTop = size-3 >= 0 ? size-3 : 0;
+        for (Move m : testedMoves.subList(minTop, size)) {
             add(m);
         }
 
