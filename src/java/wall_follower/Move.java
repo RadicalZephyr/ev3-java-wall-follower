@@ -37,6 +37,17 @@ public class Move  implements Comparable<Move> {
 
     MoveFitness fitness;
 
+    public Move() {
+        minDistance = 0.0f;
+
+        leftPressed = false;
+        rightPressed = false;
+
+        leftSpeed = 0;
+        rightSpeed = 0;
+        duration = 0;
+    }
+
     public Move(SensorReading r) {
         minDistance = r.distance;
         leftPressed = r.leftPressed;
@@ -71,8 +82,25 @@ public class Move  implements Comparable<Move> {
         duration = rand.nextInt(MAX_DURATION-MIN_DURATION)+MIN_DURATION;
     }
 
-    public Move breedWith(Move m) {
+    public Move breedWith(Move that, Random rand) {
+        Move child = new Move();
 
+        child.minDistance = rand.nextFloat() > 0.5 ?
+            this.minDistance : that.minDistance;
+
+        child.leftPressed = rand.nextFloat() > 0.5 ?
+            this.leftPressed : that.leftPressed;
+        child.rightPressed = rand.nextFloat() > 0.5 ?
+            this.rightPressed : that.rightPressed;
+
+        child.leftSpeed = rand.nextFloat() > 0.5 ?
+            this.leftSpeed : that.leftSpeed;
+        child.rightSpeed = rand.nextFloat() > 0.5 ?
+            this.rightSpeed : that.rightSpeed;
+        child.duration = rand.nextFloat() > 0.5 ?
+            this.duration : that.duration;
+
+        return child;
     }
 
     @Override
