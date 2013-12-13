@@ -23,7 +23,7 @@ public class MovePopulation {
 
     final Logger logger = LoggerFactory.getLogger(MovePopulation.class);
 
-    private static final int BASE_ITERATIONS_PER_GEN = 10;
+    private static final int BASE_ITERATIONS_PER_GEN = 20;
     private static final int ITERATIONS_MULTIPLIER = 2;
 
     private TreeSet<Move> nonePressed;
@@ -125,7 +125,7 @@ public class MovePopulation {
         logger.trace("seedPopulation");
 
         NavigableSet<Move> set = getSetForReading(reading);
-        for (int i = 0; i < 10; i++) {
+        for (int i = 0; i < 100; i++) {
             set.add(new Move(reading, rand));
             totalPopulation++;
         }

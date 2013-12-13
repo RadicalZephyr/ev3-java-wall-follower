@@ -38,7 +38,9 @@ public class MoveFitness implements Comparable<MoveFitness> {
      */
     public void scoreMove(SensorReading before, SensorReading after) {
 
-        if (inGoodRange(before.distance)) {
+        if (after.leftPressed || after.rightPressed) {
+            badMoves++;
+        } else if (inGoodRange(before.distance)) {
             if (inGoodRange(after.distance)) {
                 goodMoves++;
             } else {
