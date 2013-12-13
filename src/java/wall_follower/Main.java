@@ -75,6 +75,7 @@ public class Main
     }
 
     void setupSensors() {
+        logger.trace("setupSensors");
         leftTouch = new EV3TouchSensor(SensorPort.S1);
         rightTouch = new EV3TouchSensor(SensorPort.S4);
 
@@ -84,6 +85,7 @@ public class Main
     }
 
     void setupMotors() {
+        logger.trace("setupMotors");
         leftMotor = Motor.B;
         rightMotor = Motor.C;
         leftMotor.setAcceleration(3000);
@@ -93,6 +95,7 @@ public class Main
     }
 
     void promptForStartPush() {
+        logger.trace("promptForStartPush");
         Sound.twoBeeps();
         Sound.beep();
         LCD.clear();
@@ -104,11 +107,13 @@ public class Main
     }
 
     void startMotors() {
+        logger.trace("startMotors");
         leftMotor.backward();
         rightMotor.backward();
     }
 
     void stopMotors() {
+        logger.trace("stopMotors");
         leftMotor.stop(true);
         rightMotor.stop();
         leftMotor.flt(true);
@@ -116,12 +121,14 @@ public class Main
     }
 
     float checkDistance() {
+        logger.trace("checkDistance");
         float[] distance = new float[1];
         distanceSampler.fetchSample(distance, 0);
         return distance[0];
     }
 
     void followWall() {
+        logger.trace("followWall");
         MovePopulation population = new MovePopulation(rand);
 
         Move move;
@@ -145,6 +152,7 @@ public class Main
     }
 
     void execute(Move move) {
+        logger.trace("executeMove");
         leftMotor.setSpeed(move.leftSpeed);
         rightMotor.setSpeed(move.rightSpeed);
         startMotors();
@@ -153,6 +161,7 @@ public class Main
     }
 
     SensorReading readSensors() {
+        logger.trace("readSensors");
         SensorReading r = new SensorReading();
         r.distance = checkDistance();
         r.leftPressed = leftTouch.isPressed();
