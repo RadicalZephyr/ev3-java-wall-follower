@@ -122,6 +122,7 @@ public class MovePopulation {
     private void incrementGeneration() {
         generation++;
         iteration = 0;
+        nextGeneration *= ITERATIONS_MULTIPLIER;
 
         List<Move> allMoves = new ArrayList<Move>();
         allMoves.addAll(leftAndRight);
