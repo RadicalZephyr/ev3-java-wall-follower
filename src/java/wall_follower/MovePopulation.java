@@ -135,18 +135,31 @@ public class MovePopulation {
         // Do a steady-state selection, order by fitness value
         Collections.sort(allMoves, new Move.CompareFitness());
 
+        // Find the first move that has been tested.
+        // Preserve moves that have not yet been tested.
+        int i = 0;
+        for (Move m : allMoves) {
+            if (m.fitness.getFitness() < 0) {
+                add(m);
+            } else {
+                break;
+            }
+            i++;
+        }
+        List<Move> testedMoves = allMoves.subList(i, allMoves.size());
+
         // Now, discard the bottom percentage.  Somewhere between the
         // bottom third and bottom sixth will be discarded.
-        int size = allMoves.size();
+        int size = testedMoves.size();
         int cutoff = (int)size/(rand.nextInt(3)+3);
 
         // Now practice elitism.  The top three will be copied
         // straight to the next population.
-        for (Move m : allMoves.subList(size-3, size)) {
+        for (Move m : testedMoves.subList(size-3, size)) {
             add(m);
         }
 
-        breedIndividuals(allMoves.subList(cutoff, size));
+        breedIndividuals(testedMoves.subList(cutoff, size));
     }
 
     private void breedIndividuals(List<Move> breeders) {

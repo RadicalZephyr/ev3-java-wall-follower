@@ -59,10 +59,18 @@ public class MoveFitness implements Comparable<MoveFitness> {
         }
     }
 
+    /**
+     *  Compute the overall fitness.  This is always a number between
+     *  0 and 1 for a move that has been tested.  Returns -1 if no
+     *  trials have been run.
+     */
     public float getFitness() {
-        if (badMoves == 0)
-            return goodMoves;
-        return goodMoves / badMoves;
+        if (badMoves == 0 && goodMoves == 0) {
+            return -1;
+        } else if (badMoves == 0) {
+            return 1;
+        }
+        return goodMoves / (badMoves+goodMoves);
     }
 
     private static boolean inGoodRange(float distance) {
