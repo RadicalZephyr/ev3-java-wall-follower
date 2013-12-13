@@ -133,7 +133,7 @@ public class MovePopulation {
 
     private void incrementGeneration() {
         logger.trace("incrementGeneration");
-
+        logger.debug("population size before: {}", totalPopulation);
         generation++;
         iteration = 0;
         nextGeneration *= ITERATIONS_MULTIPLIER;
@@ -182,6 +182,7 @@ public class MovePopulation {
         }
 
         breedReplacements(testedMoves.subList(cutoff, size), cutoff);
+        logger.debug("population size after: {}", totalPopulation);
     }
 
     private void breedReplacements(List<Move> breeders, int removed) {
