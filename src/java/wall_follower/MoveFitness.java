@@ -72,7 +72,7 @@ public class MoveFitness implements Comparable<MoveFitness> {
     public float getFitness() {
         if (badMoves == 0 && goodMoves == 0) {
             return -1;
-        } else if (badMoves == 0) {
+        } else if (badMoves == 0 && goodMoves > 0) {
             return 1;
         }
         return goodMoves / (badMoves+goodMoves);
