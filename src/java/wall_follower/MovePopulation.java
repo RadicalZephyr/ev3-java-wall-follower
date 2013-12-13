@@ -159,10 +159,10 @@ public class MovePopulation {
             add(m);
         }
 
-        breedIndividuals(testedMoves.subList(cutoff, size));
+        breedIndividuals(testedMoves.subList(cutoff, size), cutoff);
     }
 
-    private void breedIndividuals(List<Move> breeders) {
+    private void breedIndividuals(List<Move> breeders, int removed) {
         Collections.shuffle(breeders, rand);
     }
 }
