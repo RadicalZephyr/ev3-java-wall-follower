@@ -85,20 +85,47 @@ public class Move  implements Comparable<Move> {
     public Move breedWith(Move that, Random rand) {
         Move child = new Move();
 
+        // Select which parent this gene comes from
         child.minDistance = rand.nextFloat() > 0.5 ?
             this.minDistance : that.minDistance;
+        // Randomly mutate it
+        child.minDistance *= rand.nextFloat() > 0.98 ?
+            (rand.nextFloat() + 0.5f) : 1.0f;
 
-        child.leftPressed = rand.nextFloat() > 0.5 ?
+        // Select which parent this gene comes from
+        child.leftPressed = rand.nextFloat() > 0.5f ?
             this.leftPressed : that.leftPressed;
-        child.rightPressed = rand.nextFloat() > 0.5 ?
-            this.rightPressed : that.rightPressed;
+        // Randomly mutate it
+        child.leftPressed = rand.nextFloat() > 0.98 ?
+            !child.leftPressed : child.leftPressed;
 
-        child.leftSpeed = rand.nextFloat() > 0.5 ?
+        // Select which parent this gene comes from
+        child.rightPressed = rand.nextFloat() > 0.5f ?
+            this.rightPressed : that.rightPressed;
+        // Randomly mutate it
+        child.rightPressed = rand.nextFloat() > 0.98 ?
+            !child.rightPressed : child.rightPressed;
+
+        // Select which parent this gene comes from
+        child.leftSpeed = rand.nextFloat() > 0.5f ?
             this.leftSpeed : that.leftSpeed;
-        child.rightSpeed = rand.nextFloat() > 0.5 ?
+        // Randomly mutate it
+        child.leftSpeed *= rand.nextFloat() > 0.98 ?
+            (rand.nextFloat() + 0.5f) : 1.0f;
+
+        // Select which parent this gene comes from
+        child.rightSpeed = rand.nextFloat() > 0.5f ?
             this.rightSpeed : that.rightSpeed;
-        child.duration = rand.nextFloat() > 0.5 ?
+        // Randomly mutate it
+        child.rightSpeed *= rand.nextFloat() > 0.98 ?
+            (rand.nextFloat() + 0.5f) : 1.0f;
+
+        // Select which parent this gene comes from
+        child.duration = rand.nextFloat() > 0.5f ?
             this.duration : that.duration;
+        // Randomly mutate it
+        child.duration *= rand.nextFloat() > 0.98 ?
+            (rand.nextFloat() + 0.5f) : 1.0f;
 
         return child;
     }
