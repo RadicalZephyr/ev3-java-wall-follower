@@ -51,18 +51,16 @@ public class Move  implements Comparable<Move> {
         leftSpeed = 0;
         rightSpeed = 0;
         duration = 0;
+
+        fitness = new MoveFitness();
     }
 
     public Move(SensorReading r) {
+        this();
+
         minDistance = r.distance;
         leftPressed = r.leftPressed;
         rightPressed = r.rightPressed;
-
-        leftSpeed = 0;
-        rightSpeed = 0;
-        duration = 0;
-
-        fitness = new MoveFitness();
     }
 
     public Move(SensorReading r, Random rand) {
