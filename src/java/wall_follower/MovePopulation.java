@@ -179,12 +179,17 @@ public class MovePopulation {
 
     private void breedReplacements(List<Move> breeders, int removed) {
         logger.trace("breedReplacements");
+        int childrenBred = 0;
 
-        Collections.shuffle(breeders, rand);
+        while (childrenBred < removed) {
+            Collections.shuffle(breeders, rand);
 
-        int size = breeders.size();
-        for (int i = 0 ; i < removed && i < size-1; i += 2) {
-            add(breeders.get(i).breedWith(breeders.get(i+1), rand));
+            int size = breeders.size();
+            for (int i = 0 ; childrenBred < removed &&
+                     i < size-1; i += 2) {
+                add(breeders.get(i).breedWith(breeders.get(i+1), rand));
+                childrenBred++;
+            }
         }
     }
 
