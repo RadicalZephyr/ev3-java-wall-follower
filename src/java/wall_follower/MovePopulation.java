@@ -173,6 +173,8 @@ public class MovePopulation {
         // bottom third and bottom sixth will be discarded.
         int size = testedMoves.size();
         int cutoff = (int)size/(rand.nextInt(3)+3);
+        logger.debug("tested moves: {}", size);
+        logger.debug("cutoff: {}", cutoff);
 
         // Now practice elitism.  The top three will be copied
         // straight to the next population.
