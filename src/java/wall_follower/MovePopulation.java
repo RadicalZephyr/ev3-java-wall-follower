@@ -165,8 +165,9 @@ public class MovePopulation {
     private void breedReplacements(List<Move> breeders, int removed) {
         Collections.shuffle(breeders, rand);
 
-        for (int i = 0 ; i < removed; i++) {
-
+        int size = breeders.size();
+        for (int i = 0 ; i < removed && i < size-1; i += 2) {
+            add(breeders.get(i).breedWith(breeders.get(i+1), rand));
         }
     }
 
