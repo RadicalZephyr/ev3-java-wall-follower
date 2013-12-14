@@ -81,7 +81,7 @@ public class Move  implements Comparable<Move> {
                        MIN_MOTOR_SPEED);
 
         // Invert motor direction if both touch sensors are pressed
-        if (leftPressed && rightPressed) {
+        if (leftPressed || rightPressed) {
             invertMotor = true;
         }
 
@@ -132,6 +132,10 @@ public class Move  implements Comparable<Move> {
         // Randomly mutate it
         child.duration *= rand.nextFloat() > 0.98 ?
             (rand.nextFloat() + 0.5f) : 1.0f;
+
+        if (child.leftPressed || child.rightPressed) {
+            invertMotor = true;
+        }
 
         return child;
     }
